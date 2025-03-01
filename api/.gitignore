@@ -1,0 +1,4 @@
+.env
+.virtualenv
+firebase-keyfile.json
+__pycache__
