@@ -2,3 +2,5 @@
 .virtualenv
 firebase-keyfile.json
 __pycache__
+images/
+test.py
