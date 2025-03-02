@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from db_connection import db_connection
-import auth
+import auth, images
 from firebase_config import initialize_firebase
 
 
@@ -28,3 +28,4 @@ def root():
     return {"message": "Hello from the API"}
 
 app.include_router(auth.router)
+app.include_router(images.router)

@@ -25,7 +25,19 @@ class UserDatabaseService(DatabaseService):
                 return existing_user
             inserted_doc=await self.collection.insert_one(user_data)
             logger.info(f"Successfully inserted user {inserted_doc.inserted_id}")
-            del user_data['_id']
+            if user_data.get("_id"):
+                del user_data["_id"]
             return user_data
         except Exception as e:
             logger.error(f"Error occurred inserting user:{e}")
+
+    async def update_user(self, uid:str, update:dict):
+        await self.init_collection()
+        try:
+            await self.collection.find_one_and_update({"uid":uid},update)
+            logger.info(f"Successfully updated user with UID {uid}")
+        except Exception as e:
+            logger.error(f"Error updating user with UID {uid}: {e}")
+
+        
+

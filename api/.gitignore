@@ -1,6 +1,7 @@
 .env
 .virtualenv
 firebase-keyfile.json
+mock_user_data.json
 __pycache__
 images/
 test.py
