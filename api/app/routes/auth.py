@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Request, HTTPException, Depends
 from fastapi.responses import JSONResponse
-from db_service import UserDatabaseService
-from get_token_data import get_token_data
+from app.db.db_service import UserDatabaseService
+from app.core.get_token_data import get_token_data
 from dotenv import load_dotenv
 import os, json
 load_dotenv()

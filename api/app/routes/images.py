@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Depends,UploadFile, File
 from fastapi.responses import JSONResponse
-from azure_blob_storage_service import AzureBlobStorageService
-from db_service import UserDatabaseService
-import time, re
+from app.services.azure_blob_storage_service import AzureBlobStorageService
+from app.db.db_service import UserDatabaseService
+import time
 router=APIRouter(prefix='/images')
 
 @router.post('/upload')

@@ -1,7 +1,7 @@
 import os
 from dotenv import load_dotenv
 from motor.motor_asyncio import AsyncIOMotorClient, AsyncIOMotorDatabase
-from logger import logger
+from app.utils.logger import logger
 load_dotenv()
 COSMOS_DB_URI=os.getenv("COSMOS_DB_URI")
 COSMOS_DB_NAME=os.getenv("COSMOS_DB_NAME")

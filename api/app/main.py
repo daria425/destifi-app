@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from db_connection import db_connection
-import auth, images
-from firebase_config import initialize_firebase
+from app.db.db_connection import db_connection
+from app.routes import auth, images
+from app.config.firebase_config import initialize_firebase
 
 
 async def lifespan(app:FastAPI):

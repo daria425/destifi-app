@@ -1,5 +1,5 @@
 from firebase_admin import auth
-from logger import logger
+from app.utils.logger import logger
 def decode_token(id_token:str):
     try:
         decoded_token = auth.verify_id_token(id_token)

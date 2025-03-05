@@ -2,7 +2,7 @@ from dotenv import load_dotenv
 import os
 from azure.storage.blob import BlobServiceClient, generate_blob_sas, BlobSasPermissions
 from datetime import datetime, timedelta, timezone
-from logger import logger
+from app.utils.logger import logger
 import requests
 load_dotenv()
 AZURE_BLOB_STORAGE_CONNECTION_STRING=os.getenv("AZURE_BLOB_STORAGE_CONNECTION_STRING")

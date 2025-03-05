@@ -1,5 +1,5 @@
-from db_connection import db_connection
-from logger import logger
+from app.db.db_connection import db_connection
+from app.utils.logger import logger
 
 class DatabaseService:
     """Base class to manage MongoDB collection"""
