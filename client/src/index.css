@@ -1,4 +1,12 @@
 @import "@radix-ui/themes/tokens/colors/sand.css";
+@import "@radix-ui/colors/black-alpha.css";
+@import "@radix-ui/themes/tokens/colors/gray.css";
+@import "@radix-ui/themes/tokens/base.css";
+
+.icon-container--large {
+  width: 48px;
+  height: 48px;
+}
 .layout {
   display: flex;
   flex-direction: column;
@@ -6,7 +14,6 @@
 .layout__sidebar {
   position: absolute;
   width: 0;
-  background-color: var(--surface-elevated);
   height: 100%;
   z-index: 2;
   top: 0;
@@ -37,6 +44,26 @@
 
 .layout__sidebar-item--active {
   background-color: var(--sand-6); /* Active state */
+}
+.dialog-title {
+  font-weight: 500;
+  margin: 0;
+}
+
+.dialog-content {
+  background-color: var(--gray-1);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100vw;
+  height: 100vh;
+  padding: 25px;
+}
+.dialog-overlay {
+  background-color: var(--black-a9);
+  position: absolute;
+  inset: 0;
 }
 @media screen and (min-width: 768px) {
   .layout {
