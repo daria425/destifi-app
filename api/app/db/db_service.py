@@ -39,5 +39,21 @@ class UserDatabaseService(DatabaseService):
         except Exception as e:
             logger.error(f"Error updating user with UID {uid}: {e}")
 
+    async def get_image_from_user(self, uid:str,image_name:str):
+        await self.init_collection()
+        try:
+            user=self.collection.find_one({"uid":uid})
+            if user:
+                stored_images=user.get("stored_images")
+                if stored_images:
+                    for image in stored_images:
+                        if image.get("image_name")==image_name:
+                            return image
+            return None
+        except Exception as e:
+            logger.error(f"Error getting image from user {uid}: {e}")
+            return None
+
+
         
 

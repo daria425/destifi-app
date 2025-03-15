@@ -5,6 +5,10 @@ from app.db.db_service import UserDatabaseService
 import time
 router=APIRouter(prefix='/images')
 
+@router.get("")
+async def get_image_url(uid:str, user_db_service:UserDatabaseService=Depends()):
+    user=await user_db_service.get_user(uid)
+
 @router.post('/upload')
 async def upload_image(uid:str, image_file:UploadFile=File(...),user_db_service:UserDatabaseService=Depends()):
     container_name=uid.lower()
@@ -28,10 +32,5 @@ async def upload_image(uid:str, image_file:UploadFile=File(...),user_db_service:
        "message": "An error occurred uploading image", 
        "data": None
     }, status_code=500)
-
-
-
-
-
 
 
