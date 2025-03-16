@@ -1,15 +1,38 @@
 import { Text, Box, TextArea, Flex } from "@radix-ui/themes";
+import { apiConfig } from "../config/api.config";
 import { sand } from "@radix-ui/colors";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { PrimaryButton, SecondaryButton } from "./Buttons";
 import { CameraIcon } from "@radix-ui/react-icons";
-export default function ItineraryInput() {
+export default function ItineraryInput({ uid }) {
+  console.log(uid);
   const fileInputRef = useRef(null);
+  const [imageFile, setImageFile] = useState(null);
   function handleButtonClick() {
     fileInputRef.current.click();
   }
+  function handleImageFileChange(e) {
+    const uploadedImageFile = e.target.files[0];
+    if (uploadedImageFile) {
+      setImageFile(uploadedImageFile);
+    }
+  }
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("image_file", imageFile);
+    const response = await apiConfig.post("images/upload", formData, {
+      params: {
+        uid,
+      },
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    console.log(response);
+  }
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <Text as="label" htmlFor="Inspiration Image">
         Inspiration Image
       </Text>
@@ -40,6 +63,7 @@ export default function ItineraryInput() {
           type="file"
           id="Inspiration Image"
           name="Inspiration Image"
+          onChange={handleImageFileChange}
         />
       </Flex>
       <Text as="label" htmlFor="Additional Notes">

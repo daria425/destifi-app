@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.db.db_connection import db_connection
-from app.routes import auth, images
+from app.routes import auth, images, itinerary
 from app.config.firebase_config import initialize_firebase
 
 
@@ -29,3 +29,4 @@ def root():
 
 app.include_router(auth.router)
 app.include_router(images.router)
+app.include_router(itinerary.router)

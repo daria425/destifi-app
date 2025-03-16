@@ -3,7 +3,7 @@ from azure.ai.projects import AIProjectClient
 from azure.identity import DefaultAzureCredential
 from azure.ai.projects.models import FunctionTool, RequiredFunctionToolCall, SubmitToolOutputsAction, ToolOutput, BingGroundingTool, ToolSet
 from dotenv import load_dotenv
-from typing import List
+from app.core.agents.agent_functions import extract_travel_details
 load_dotenv()
 ai_foundry_project_key=os.getenv("AZURE_AI_FOUNDRY_PROJECT_KEY")
 ai_foundry_connection_string=os.getenv("AZURE_AI_FOUNDRY_PROJECT_CONNECTION_STRING")
@@ -11,72 +11,6 @@ project_client = AIProjectClient.from_connection_string(
     credential=DefaultAzureCredential(), conn_str=ai_foundry_connection_string
 )
 
-sample_description="""
-    **Travel Destination Insights:**
-
-    Analyzing the collage, the terminal theme suggests a journey and exploration, ideal for travel enthusiasts looking for a unique combination of tropical nature and cultural experience. The imagery suggests a tropical destination, likely a rainforest region known for its rich biodiversity and breathtaking landscapes, possibly like the Amazon Rainforest or the Galapagos Islands.
-
-    **Suggested Travel Destinations:**
-
-    1. **Tayuca, Mexico**: Noted for its vibrant tropical flowers and lush greenery, Tayuca offers a picturesque backdrop akin to the orchid and lotus paintings in your image.
-    2. **Yunnan, China**: The earthy tones and images of natural and ancient structures suggest Yunnan, a province known for its biodiverse rainforest, ethnic cultures, and historical sites.
-    3. **Okinawa, Japan**: The diverse natural elements and serene landscapes presented in the collage align with the region's rich cultural heritage and unique flora, tropical islands, and traditional Ryukyu Islands culture.
-    4. **Borneo, Indonesia**: The image's rural charm and natural resources point to Borneo, known for its peatland rice fields, Meheram cowries, and a bamboo forest.
-
-    **Activities and Vibe:**
-
-    The tropical and serene vibe of the collage suggests a travel experience filled with outdoor adventures such as hiking, bird-watching, and nature photography. Activities like visiting local markets, attending cultural festivals, and participating in traditional crafts would reveal the rich local culture, mirroring the door-to-yid and delivery box scenes that imply exploration and discovery.
-
-    **Weather and Season:**
-
-    Given the lush tropical imagery, the travel experience would likely be in the rainy season, offering vibrant colors and lush landscapes. Expect humidity, occasional rain showers, and warm weather during this period, suitable for a rich, immersive experience in nature and local communities.
-
-    **Keywords for Trip Recommendations:**
-
-    - Tropical rainforest
-    - Biodiversity
-    - Cultural heritage
-    - Outdoor adventures
-    - Nature photography
-    - Traditional crafts
-    - Floral landscapes
-    - Authentic markets
-
-    This collage-inspired travel plan promises an immersive journey through some of the world's most enchanting tropical destinations, blending cultural richness with natural splendor."""
-
-def extract_travel_details(
-    destination: str,
-    vibe: str,
-    recommended_activities: List[str],
-    seasonal_insights: str,
-    trip_length: str,
-    budget: str,
-    preferred_activities: List[str]
-) -> str:
-    """
-    Extracts structured travel details from the provided text.
-
-    :param destination: The travel destination mentioned in the text, e.g., 'Santorini, Greece'.
-    :param vibe: Overall theme or mood of the trip, e.g., 'Romantic, scenic, luxurious'.
-    :param recommended_activities: List of suggested activities based on the destination.
-    :param seasonal_insights: Best seasons to visit and any relevant seasonal considerations.
-    :param trip_length: Ideal duration of the trip, e.g., '5 days'.
-    :param budget: Estimated budget category for the trip, e.g., 'Mid-range'.
-    :param preferred_activities: List of user-specified preferences for activities.
-    
-    :return: A JSON string containing structured travel details.
-    """
-    travel_data = {
-        "destination": destination,
-        "vibe": vibe,
-        "recommended_activities": recommended_activities,
-        "seasonal_insights": seasonal_insights,
-        "trip_length": trip_length,
-        "budget": budget,
-        "preferred_activities": preferred_activities,
-    }
-    
-    return json.dumps(travel_data, indent=4)
 
 functions = FunctionTool(functions=[extract_travel_details])
 

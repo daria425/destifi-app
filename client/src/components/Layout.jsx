@@ -1,4 +1,4 @@
-import { Outlet, useLocation } from "react-router";
+import { Outlet, useLocation, useOutletContext } from "react-router";
 import { Box } from "@radix-ui/themes";
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import AppContainer from "./AppContainer";
@@ -6,6 +6,8 @@ import RouterLink from "./RouterLink";
 import { sand } from "@radix-ui/colors";
 export default function Layout({ navigation }) {
   const { pathname } = useLocation();
+  const { authenticatedUser } = useOutletContext();
+  console.log("Layout rerendered with", authenticatedUser);
   return (
     <div className="layout">
       <Box className="layout__sidebar" style={{ backgroundColor: sand.sand1 }}>
@@ -32,7 +34,7 @@ export default function Layout({ navigation }) {
         </NavigationMenu.Root>
       </Box>
       <AppContainer>
-        <Outlet />
+        <Outlet context={{ authenticatedUser }} />
       </AppContainer>
     </div>
   );
