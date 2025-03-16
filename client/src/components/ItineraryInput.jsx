@@ -2,10 +2,11 @@ import { Text, Box, TextArea, Flex } from "@radix-ui/themes";
 import { apiConfig } from "../config/api.config";
 import { sand } from "@radix-ui/colors";
 import { useRef, useState } from "react";
+import { useNavigate } from "react-router";
 import { PrimaryButton, SecondaryButton } from "./Buttons";
 import { CameraIcon } from "@radix-ui/react-icons";
 export default function ItineraryInput({ uid }) {
-  console.log(uid);
+  const nav = useNavigate();
   const fileInputRef = useRef(null);
   const [imageFile, setImageFile] = useState(null);
   function handleButtonClick() {
@@ -21,16 +22,29 @@ export default function ItineraryInput({ uid }) {
     e.preventDefault();
     const formData = new FormData();
     formData.append("image_file", imageFile);
-    const response = await apiConfig.post("images/upload", formData, {
-      params: {
-        uid,
-      },
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
-    console.log(response);
+
+    try {
+      const response = await apiConfig.post("chat/itinerary/create", formData, {
+        params: {
+          uid,
+        },
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      if (response.status === 200) {
+        const { data } = response.data;
+        nav(`/app/chat/${data.thread_id}`, {
+          state: { responseData: data },
+        });
+      }
+    } catch (error) {
+      console.error("Error creating itinerary:", error);
+      // Handle error appropriately
+    }
   }
+
   return (
     <form onSubmit={handleSubmit}>
       <Text as="label" htmlFor="Inspiration Image">

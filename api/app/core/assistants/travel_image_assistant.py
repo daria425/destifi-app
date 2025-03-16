@@ -50,6 +50,7 @@ class TravelImageAnalyzer(Assistant):
         }]
 
         response = self.generate_response(messages)
+        print(f"Response from image analysis: {response}")
         return response
 
 
