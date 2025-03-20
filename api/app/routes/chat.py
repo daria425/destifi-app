@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, UploadFile, File
 from fastapi.responses import JSONResponse
 from app.services.azure_blob_storage_service import AzureBlobStorageService
 from app.db.db_service import UserDatabaseService
-from app.core.agents.travel_agent import Travel_Agent
+from app.core.agents.travel_agent import TravelAgent
 from app.core.assistants.travel_image_assistant import TravelImageAnalyzer
 from app.schemas.user_message import UserMessage
 from app.core.create_itinerary import create_itinerary_from_image
@@ -10,8 +10,8 @@ import time
 router=APIRouter(prefix="/chat")
 
 @router.post("")
-def run_chat(user_message:UserMessage, travel_agent:Travel_Agent=Depends()):
-    response=travel_agent.respond_to_user(user_message.message)
+def run_chat(user_message:UserMessage, travel_agent:TravelAgent=Depends()):
+    response=travel_agent.respond_to_user(user_message.message, user_message.thread_id)
     return {
         "message": "Message run completed successfully", 
         "data":{
@@ -20,7 +20,7 @@ def run_chat(user_message:UserMessage, travel_agent:Travel_Agent=Depends()):
     }
 
 @router.post('/itinerary/create')
-async def create_itinerary(uid:str, image_file:UploadFile=File(...),user_db_service:UserDatabaseService=Depends(), travel_image_analyzer:TravelImageAnalyzer=Depends(), travel_agent:Travel_Agent=Depends()):
+async def create_itinerary(uid:str, image_file:UploadFile=File(...),user_db_service:UserDatabaseService=Depends(), travel_image_analyzer:TravelImageAnalyzer=Depends(), travel_agent:TravelAgent=Depends()):
     container_name=uid.lower()
     azure_blob_storage_service=AzureBlobStorageService(container_name)
     azure_blob_storage_service.init_clients()

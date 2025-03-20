@@ -3,14 +3,18 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.db.db_connection import db_connection
 from app.routes import auth, chat, images
 from app.config.firebase_config import initialize_firebase
+import logging
 
+logging.getLogger("azure").setLevel(logging.WARNING)
 
 async def lifespan(app:FastAPI):
     """Connect to MongoDB on startup and close on shutdown."""
     await db_connection.connect()
     initialize_firebase()
     yield
-    await db_connection.close() 
+    await db_connection.close()
+
+
 app = FastAPI(lifespan=lifespan)
 
 origins = ["http://localhost:5173"]

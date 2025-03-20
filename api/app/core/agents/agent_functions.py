@@ -33,3 +33,37 @@ def extract_travel_details(
     }
     
     return json.dumps(travel_data, indent=4)
+
+
+def extract_activity_details(
+    itinerary_text: str
+) -> str:
+    """
+    Extracts specific activities from the provided itinerary text.
+
+    :param itinerary_text: Raw text containing the travel itinerary details.
+    
+    :return: A JSON string containing a list of structured activity details.
+    """
+    activities = []
+    day_sections = itinerary_text.split("Day ")
+    
+    for section in day_sections[1:]:
+        try:
+            day_number = section.split(":")[0].strip()
+            details = section.split("\n")[1:]  # Skip the day heading
+            
+            for detail in details:
+                if ":" in detail:
+                    time_of_day, activity = detail.split(":", 1)
+                    activities.append({
+                        "day": int(day_number),
+                        "time_of_day": time_of_day.strip(),
+                        "activity": activity.strip()
+                    })
+        except Exception as e:
+            print(f"Error parsing section: {section} - {e}")
+
+    return json.dumps(activities, indent=4)
+
+

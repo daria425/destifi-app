@@ -5,7 +5,6 @@ import Index from "./components/Index";
 import LoginForm from "./components/LoginForm";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Dashboard from "./components/Dashboard";
-import Chat from "./components/Chat";
 import RadixTheme from "./config/RadixTheme";
 import { navigation } from "./config/navigation.config";
 function App() {
@@ -32,7 +31,7 @@ function App() {
             },
             {
               path: "chat/:threadId",
-              element: <Chat />,
+              element: <div>Chat</div>,
             },
             {
               path: "favourites",

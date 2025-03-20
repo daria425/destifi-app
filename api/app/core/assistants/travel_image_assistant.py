@@ -6,11 +6,8 @@ from typing import List
 import base64, os
 
 load_dotenv()
-ai_foundry_project_key=os.getenv("AZURE_AI_FOUNDRY_PROJECT_KEY")
 phi_4_deployment_url = os.getenv("AZURE_PHI_4_MULTIMODAL_DEPLOYMENT_URL")
 phi_4_deployment_key = os.getenv("AZURE_PHI_4_MULTIMODAL_DEPLOYMENT_KEY")
-gpt_4_o_deployment_url = os.getenv("AZURE_GPT_4_O_DEPLOYMENT_URL")
-gpt_4_o_deployment_key = os.getenv("AZURE_GPT_4_O_DEPLOYMENT_KEY")
 
 class Assistant:
     def __init__(self, endpoint, credential, model=None):
