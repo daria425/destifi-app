@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router";
+import { Link } from "react-router";
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 
 export default function RouterLink({ to, isActive, children }) {

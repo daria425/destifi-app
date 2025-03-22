@@ -1,5 +1,5 @@
 import { Popover } from "@radix-ui/themes";
-import { useState } from "react";
+
 export default function SearchPopover({ options }) {
   return (
     <Popover.Root>

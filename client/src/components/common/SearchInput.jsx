@@ -4,11 +4,12 @@ export default function SearchInput({
   searchValue,
   textFieldProps,
 }) {
+  console.log(searchValue);
   return (
-    <TextField
+    <TextField.Root
       {...textFieldProps}
       value={searchValue}
-      onChange={(e) => searchHandler(e.target.value)}
-    />
+      onChange={(e) => searchHandler(e)}
+    ></TextField.Root>
   );
 }
