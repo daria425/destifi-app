@@ -1,31 +1,50 @@
-import { useState } from "react";
+import React from "react";
 import SearchInput from "./SearchInput";
 import SearchPopover from "./SearchPopover";
 import { useAsyncSearch } from "../../hooks/useAsyncSearch";
-
+import { Box } from "@radix-ui/themes";
+import { useState } from "react";
 export default function AsyncSearchableSelect({
   urlPath,
   textFieldProps,
   searchHandler,
   searchValue,
   queryParams,
+  searchLabel,
 }) {
-  console.log(searchValue);
-  const { options, loading, error } = useAsyncSearch({
+  const { options } = useAsyncSearch({
     urlPath,
     searchValue,
     queryParams,
   });
-  console.log("Options from API", options);
+
+  const [isSearching, setIsSearching] = useState(false);
+  function handleSearchFocus() {
+    if (!isSearching) {
+      setIsSearching(true);
+    } else {
+      setIsSearching(false);
+    }
+  }
+  const formattedOptions = options.map((option) => ({
+    label: option.symbol, // Stock ticker symbol
+    description: option.name || "No name available", // Fallback for missing name
+    additionalInfo:
+      option.sector && option.sector !== 0 ? option.sector : "Unknown sector", // Handle missing sector
+  }));
 
   return (
-    <>
+    <Box position={"relative"}>
+      {searchLabel}
       <SearchInput
         searchHandler={searchHandler}
         searchValue={searchValue}
         textFieldProps={textFieldProps}
+        focusHandler={handleSearchFocus}
       />
-      {/* <SearchPopover options={options}/> */}
-    </>
+      {isSearching && formattedOptions.length > 0 && (
+        <SearchPopover options={formattedOptions} />
+      )}
+    </Box>
   );
 }

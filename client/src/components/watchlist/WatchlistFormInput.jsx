@@ -2,6 +2,7 @@ import { Text, Box, TextField } from "@radix-ui/themes";
 import { useState } from "react";
 import { PrimaryButton } from "../common/Buttons";
 import StockSearch from "./StockSearch";
+import InputLabel from "../common/InputLabel";
 export default function WatchlistFormInput({ uid }) {
   async function handleSubmit(e) {
     e.preventDefault();
@@ -25,19 +26,15 @@ export default function WatchlistFormInput({ uid }) {
   return (
     <form onSubmit={handleSubmit}>
       <Box>
-        <Text as="label" htmlFor="watchlist-name">
-          Watchlist Name
-        </Text>
-        <TextField.Root placeholder="My Watchlist">
-          <TextField.Slot
-            type="text"
-            id="watchlist-name"
-            name="watchlist-name"
-            value={watchlistData.name}
-            onChange={handleInputChange}
-            required
-          />
-        </TextField.Root>
+        <InputLabel labelText="Watchlist Name" inputId="watchlist-name" />
+        <TextField.Root
+          placeholder="My Watchlist"
+          type="text"
+          id="watchlist-name"
+          name="watchlist-name"
+          value={watchlistData.name}
+          onChange={handleInputChange}
+        ></TextField.Root>
         <StockSearch
           stockSymbol={searchInput}
           stockSearchHandler={handleSearch}
