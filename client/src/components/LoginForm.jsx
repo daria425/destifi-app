@@ -30,7 +30,7 @@ export default function LoginForm() {
           await loginWithGoogle();
           break;
       }
-      nav("/app/dashboard");
+      nav("/app/watchlist");
     } catch (err) {
       console.error("Signup error", err);
     }

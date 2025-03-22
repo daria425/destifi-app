@@ -4,7 +4,7 @@ import Layout from "./components/Layout";
 import Index from "./components/Index";
 import LoginForm from "./components/LoginForm";
 import ProtectedRoute from "./components/ProtectedRoute";
-import Dashboard from "./components/Dashboard";
+import Watchlist from "./components/Watchlist";
 import RadixTheme from "./config/RadixTheme";
 import { navigation } from "./config/navigation.config";
 function App() {
@@ -26,20 +26,16 @@ function App() {
           element: <Layout navigation={navigation} />,
           children: [
             {
-              path: "dashboard",
-              element: <Dashboard />,
+              path: "watchlist",
+              element: <Watchlist />,
             },
             {
               path: "chat/:threadId",
               element: <div>Chat</div>,
             },
             {
-              path: "favourites",
-              element: <div>Favourites</div>,
-            },
-            {
-              path: "settings",
-              element: <div>Settings</div>,
+              path: "alerts",
+              element: <div>Alerts</div>,
             },
           ],
         },

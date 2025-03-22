@@ -1,19 +1,18 @@
-import { HomeIcon, HeartIcon, GearIcon } from "@radix-ui/react-icons";
+import {
+  HomeIcon,
+  ExclamationTriangleIcon,
+  EyeOpenIcon,
+} from "@radix-ui/react-icons";
 const navigation = [
   {
-    name: "Dashboard",
-    path: "/app/dashboard",
+    name: "Watchlist",
+    path: "/app/watchlist",
     linkIcon: HomeIcon,
   },
   {
-    name: "Favourites",
-    path: "/app/favourites",
-    linkIcon: HeartIcon,
-  },
-  {
-    name: "Settings",
-    path: "/app/settings",
-    linkIcon: GearIcon,
+    name: "Alerts",
+    path: "/app/alerts",
+    linkIcon: ExclamationTriangleIcon,
   },
 ];
 
