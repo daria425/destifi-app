@@ -1,7 +1,7 @@
 import { Button } from "@radix-ui/themes";
-function PrimaryButton({ children, onClick }) {
+function PrimaryButton({ children, onClick, type = "button" }) {
   return (
-    <Button onClick={onClick} variant="solid">
+    <Button onClick={onClick} variant="solid" type={type}>
       {children}
     </Button>
   );

@@ -1,10 +1,10 @@
 import { createBrowserRouter, RouterProvider } from "react-router";
 import { AuthProvider } from "./services/AuthProvider";
-import Layout from "./components/Layout";
-import Index from "./components/Index";
-import LoginForm from "./components/LoginForm";
-import ProtectedRoute from "./components/ProtectedRoute";
-import Watchlist from "./components/Watchlist";
+import Layout from "./components/common/Layout";
+import Index from "./components/common/Index";
+import LoginForm from "./components/login/LoginForm";
+import ProtectedRoute from "./components/common/ProtectedRoute";
+import Watchlist from "./components/watchlist/Watchlist";
 import RadixTheme from "./config/RadixTheme";
 import { navigation } from "./config/navigation.config";
 function App() {
