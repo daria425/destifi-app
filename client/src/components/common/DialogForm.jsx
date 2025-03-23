@@ -1,8 +1,14 @@
 import * as Dialog from "@radix-ui/react-dialog";
+import { Flex } from "@radix-ui/themes";
 import RadixTheme from "../../config/RadixTheme";
-export default function DialogForm({ title, children }) {
+export default function DialogForm({
+  title,
+  children,
+  dialogOpen,
+  dialogCloseButton,
+}) {
   return (
-    <Dialog.Root open={true} className="dialog-root">
+    <Dialog.Root className="dialog-root" open={dialogOpen}>
       <Dialog.Portal>
         <RadixTheme>
           <Dialog.Overlay className="dialog-overlay" />
@@ -11,7 +17,10 @@ export default function DialogForm({ title, children }) {
             aria-describedby={undefined}
             aria-labelledby="dialog-form"
           >
-            <Dialog.Title className="dialog-title">{title}</Dialog.Title>
+            <Flex justify={"between"} align={"center"}>
+              <Dialog.Title className="dialog-title">{title}</Dialog.Title>
+              {dialogCloseButton}
+            </Flex>
             {children}
           </Dialog.Content>
         </RadixTheme>

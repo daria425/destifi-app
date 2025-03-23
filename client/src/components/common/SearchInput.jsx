@@ -11,7 +11,7 @@ export default function SearchInput({
       value={searchValue}
       onChange={(e) => searchHandler(e)}
       onFocus={focusHandler}
-      onBlur={focusHandler}
+      onClick={focusHandler}
     ></TextField.Root>
   );
 }

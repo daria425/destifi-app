@@ -10,6 +10,7 @@ def decode_token(id_token:str):
         return None
 
 def get_token_data(id_token:str):
+    print(id_token)
     decoded_token=decode_token(id_token)
     if decoded_token:
         user_data = {

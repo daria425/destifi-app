@@ -15,4 +15,7 @@ def get_project_client():
 def close_project_client(project_client):
     project_client.close()
 
+
+
 project_client=get_project_client()
+bing_connection=project_client.connections.get(connection_name=os.getenv("AZURE_BING_CONNECTION_NAME"))

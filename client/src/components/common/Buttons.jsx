@@ -1,4 +1,5 @@
-import { Button } from "@radix-ui/themes";
+import { Button, IconButton } from "@radix-ui/themes";
+import { Cross2Icon } from "@radix-ui/react-icons";
 function PrimaryButton({ children, onClick, type = "button" }) {
   return (
     <Button onClick={onClick} variant="solid" type={type}>
@@ -21,4 +22,11 @@ function SecondaryButton({ children, onClick, type = "button" }) {
   );
 }
 
-export { PrimaryButton, SecondaryButton };
+function CloseButton({ onClick, iconProps }) {
+  return (
+    <IconButton onClick={onClick} variant="ghost">
+      <Cross2Icon {...iconProps} />
+    </IconButton>
+  );
+}
+export { PrimaryButton, SecondaryButton, CloseButton };

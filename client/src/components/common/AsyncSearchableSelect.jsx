@@ -9,8 +9,12 @@ export default function AsyncSearchableSelect({
   textFieldProps,
   searchHandler,
   searchValue,
+  selectHandler,
   queryParams,
   searchLabel,
+  selectDropdownOpen,
+  handleOpenDropdown,
+  isAdded,
 }) {
   const { options } = useAsyncSearch({
     urlPath,
@@ -20,13 +24,11 @@ export default function AsyncSearchableSelect({
 
   const [isSearching, setIsSearching] = useState(false);
   function handleSearchFocus() {
-    if (!isSearching) {
-      setIsSearching(true);
-    } else {
-      setIsSearching(false);
-    }
+    handleOpenDropdown();
+    setIsSearching(true);
   }
   const formattedOptions = options.map((option) => ({
+    ...option,
     label: option.symbol, // Stock ticker symbol
     description: option.name || "No name available", // Fallback for missing name
     additionalInfo:
@@ -41,9 +43,14 @@ export default function AsyncSearchableSelect({
         searchValue={searchValue}
         textFieldProps={textFieldProps}
         focusHandler={handleSearchFocus}
+        clickHandler={handleOpenDropdown}
       />
-      {isSearching && formattedOptions.length > 0 && (
-        <SearchPopover options={formattedOptions} />
+      {selectDropdownOpen && isSearching && formattedOptions.length > 0 && (
+        <SearchPopover
+          options={formattedOptions}
+          selectHandler={selectHandler}
+          isAdded={isAdded}
+        />
       )}
     </Box>
   );

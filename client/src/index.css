@@ -82,6 +82,11 @@
 .search-popover__item:hover {
   background-color: var(--iris-3);
 }
+
+.close-icon > path {
+  fill: var(--mauve-12);
+  stroke-width: 35;
+}
 @media screen and (min-width: 768px) {
   .layout {
     overflow: hidden;
