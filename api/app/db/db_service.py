@@ -53,6 +53,19 @@ class UserDatabaseService(DatabaseService):
         except Exception as e:
             logger.error(f"Error getting image from user {uid}: {e}")
             return None
+        
+
+class WatchlistDatabaseService(DatabaseService):
+    def __init__(self):
+        super().__init__("watchlists")
+    async def create_watchlist_in_db(self, uid:str, watchlist:dict):
+        await self.init_collection()
+        try:
+            watchlist['uid']=uid
+            inserted_doc=await self.collection.insert_one(watchlist)
+            logger.info(f"Successfully inserted watchlist {inserted_doc.inserted_id}")
+        except Exception as e:
+            logger.error(f"Error occurred inserting watchlist:{e}")
 
 
         

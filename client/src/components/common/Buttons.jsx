@@ -1,20 +1,32 @@
 import { Button, IconButton } from "@radix-ui/themes";
+
 import { Cross2Icon } from "@radix-ui/react-icons";
-function PrimaryButton({ children, onClick, type = "button" }) {
+function PrimaryButton({
+  children,
+  onClick,
+  type = "button",
+  disabled = false,
+}) {
   return (
-    <Button onClick={onClick} variant="solid" type={type}>
+    <Button onClick={onClick} variant="solid" type={type} disabled={disabled}>
       {children}
     </Button>
   );
 }
 
-function SecondaryButton({ children, onClick, type = "button" }) {
+function SecondaryButton({
+  children,
+  onClick,
+  type = "button",
+  disabled = false,
+}) {
   return (
     <Button
       onClick={onClick}
       color="gray"
       variant="soft"
       type={type}
+      disabled={disabled}
       highContrast
     >
       {children}

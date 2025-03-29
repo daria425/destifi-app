@@ -9,21 +9,29 @@ export default function WatchlistFormInput({ uid }) {
     console.log(watchlistData);
   }
   const [watchlistData, setWatchlistData] = useState({
-    name: "",
     uid: uid,
-    equities: [],
+    watchlist: {
+      name: "",
+      equities: [],
+    },
   });
   const [searchInput, setSearchInput] = useState("");
   const [selectDropdownOpen, setSelectDropdownOpen] = useState(true);
   const isAdded = (stock) => {
-    return watchlistData.equities.some(
+    return watchlistData.watchlist.equities.some(
       (equity) => equity.symbol === stock.symbol
     );
   };
 
   const handleInputChange = (e) => {
     if (e.target.name === "watchlist-name") {
-      setWatchlistData({ ...watchlistData, name: e.target.value });
+      setWatchlistData({
+        ...watchlistData,
+        watchlist: {
+          ...watchlistData.watchlist,
+          name: e.target.value,
+        },
+      });
     }
   };
 
@@ -31,7 +39,10 @@ export default function WatchlistFormInput({ uid }) {
     if (!isAdded(stock)) {
       setWatchlistData({
         ...watchlistData,
-        equities: [...watchlistData.equities, stock],
+        watchlist: {
+          ...watchlistData.watchlist,
+          equities: [...watchlistData.watchlist.equities, stock],
+        },
       });
     }
     setSearchInput("");
@@ -63,6 +74,7 @@ export default function WatchlistFormInput({ uid }) {
           value={watchlistData.name}
           onChange={handleInputChange}
           onClick={handleCloseSelect}
+          required
         ></TextField.Root>
         <StockSearch
           isAdded={isAdded}
@@ -73,16 +85,24 @@ export default function WatchlistFormInput({ uid }) {
           handleOpenDropdown={handleOpenDropdown}
         />
       </Box>
-      {watchlistData.equities.length > 0 && (
+      {watchlistData.watchlist.equities.length > 0 && (
         <Flex>
-          {watchlistData.equities.map((equity) => (
+          {watchlistData.watchlist.equities.map((equity) => (
             <Badge key={equity.symbol} color="blue">
               {equity.symbol}
             </Badge>
           ))}
         </Flex>
       )}
-      <PrimaryButton type="submit">Create Watchlist</PrimaryButton>
+      <PrimaryButton
+        disabled={
+          watchlistData.watchlist.equities.length === 0 ||
+          watchlistData.watchlist.name.trim() === ""
+        }
+        type="submit"
+      >
+        Create Watchlist
+      </PrimaryButton>
     </form>
   );
 }
