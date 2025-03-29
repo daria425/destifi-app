@@ -1,4 +1,5 @@
-from fastapi import APIRouter, Depends, JSONResponse
+from fastapi import APIRouter, Depends
+from fastapi.responses import JSONResponse
 from app.db.db_service import WatchlistDatabaseService
 from app.schemas.watchlist_create_request_model import WatchlistCreateRequestModel
 from app.utils.logger import logger

@@ -1,6 +1,6 @@
 from pydantic import BaseModel, ConfigDict
 from typing import List
-class Equity:
+class Equity(BaseModel):
     name:str
     symbol:str
     model_config=ConfigDict(extra='allow')
